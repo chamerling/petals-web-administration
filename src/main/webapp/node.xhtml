@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+	
+<h:body>
+	<f:metadata>
+		<f:viewParam name="name" value="#{nodeBean.petalsNode}" converter="#{nodeConvertor}" required="false" />
+	</f:metadata>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+		<ui:define name="header">
+			<h1>#{nodeBean.getTitle()}</h1>
+			<p class="page-description">#{nodeBean.getDescription()}</p>
+		</ui:define>
+
+		<ui:define name="content">
+			<c:choose>
+				<!-- No node to show? -->
+				<c:when test="#{ ! nodeBean.exist()}">
+					<p class="page-left">#{msg['node.not.found']}</p>
+				</c:when>
+
+				<c:otherwise>
+					<div class="page-left">
+						<div class="bus #{nodeBean.petalsNode.online ? 'purple-left-bus':'grey-left-bus'}">
+							<p>#{nodeBean.petalsNode.containerName}</p>
+						</div>
+						<div class="topo-middle#{nodeBean.petalsNode.online ? '':'-offline'} common-topo"></div>
+					</div>
+					<div class="clear"></div>
+					
+					<div class="node-description">
+						<p class="node-section">#{msg['node.information.title']}</p>
+						<p>#{msg['node.information.container']} #{nodeBean.petalsNode.containerName}</p>
+						<p>#{msg['node.information.type']} #{nodeBean.petalsNode.master ? msg['node.information.master']: msg['node.information.slave'] }</p>
+						<p>#{msg['node.information.host']} #{nodeBean.petalsNode.host}</p>
+						
+						<c:if test="#{nodeBean.hasDescription()}"> 
+						<p><span>#{msg['node.information.description']}</span> <span>#{nodeBean.petalsNode.description}</span></p>
+						</c:if>
+					</div>
+						
+					<div class="node-description">
+						<p class="node-section">#{msg['node.ports.title']}</p>	
+						<ui:repeat value="#{nodeBean.getPortsEntries()}" var="port">
+							<p>#{nodeBean.getFormattedPropertyName( port.key )} #{port.value}</p>
+						</ui:repeat>
+					</div>
+					<div class="clear"></div>
+					
+					<c:if test="#{nodeBean.petalsNode.online}">
+						<div class="node-description">
+							<p class="node-section">#{msg['node.container.title']}</p>
+							<ul class="node-items">
+								<li>
+									<h:link outcome="registry" title="#{msg['registry.description']}">
+										#{msg['registry.title']}
+										<f:param name="name" value="" />
+									</h:link>
+								</li>
+								<li>
+									<h:link outcome="registry" title="#{msg['node.container.loggers.desc']}">
+										#{msg['node.container.loggers.link']}
+										<f:param name="name" value="" />
+									</h:link>
+								</li>
+								<li>
+									<h:link outcome="registry" title="#{msg['node.container.parameters.desc']}">
+										#{msg['node.container.parameters.link']}
+										<f:param name="name" value="" />
+									</h:link>
+								</li>
+							</ul>
+						</div>
+						
+						<div class="node-description">
+							<p class="node-section">#{msg['node.artifacts.title']}</p>
+							<ul class="node-items">
+								<li>
+									<h:link outcome="registry" title="#{msg['node.artifacts.install.desc']}">
+										#{msg['node.artifacts.install.link']}
+										<f:param name="name" value="" />
+									</h:link>
+								</li>
+								<li>
+									<h:link outcome="registry" title="#{msg['node.artifacts.components.desc']}">
+										#{msg['node.artifacts.components.link']}
+										<f:param name="name" value="" />
+									</h:link>
+								</li>
+								<li>
+									<h:link outcome="registry" title="#{msg['node.artifacts.sa.desc']}">
+										#{msg['node.artifacts.sa.link']}
+										<f:param name="name" value="" />
+									</h:link>
+								</li>
+								<li>
+									<h:link outcome="registry" title="#{msg['node.artifacts.su.desc']}">
+										#{msg['node.artifacts.su.link']}
+										<f:param name="name" value="" />
+									</h:link>
+								</li>
+								<li>
+									<h:link outcome="registry" title="#{msg['node.artifacts.sl.desc']}">
+										#{msg['node.artifacts.sl.link']}
+										<f:param name="name" value="" />
+									</h:link>
+								</li>
+							</ul>
+						</div>
+						<div class="clear"></div>
+					</c:if>
+				</c:otherwise>
+			</c:choose>
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+
+	<ui:composition template="/template/commonLayout.xhtml">
+
+
+		<ui:define name="header">
+			<h1>
+				<h:outputText value="#{msg['installArtifact.header.h1']}" />
+			</h1>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<p:messages id="messages" />
+
+			<p:accordionPanel activeIndex="">
+				<p:tab title="#{msg['installArtifact.tab1']}">
+					<h:form id="uploadForm" enctype="multipart/form-data">
+						<h:panelGrid id="panel1" columns="2" cellpadding="10">
+							<p:fileUpload id="upload" mode="simple" value="#{installArtifactBean.file}" />
+							<p:commandButton id="submitBtn" value="#{msg['action.install']}" ajax="false"
+								actionListener="#{installArtifactBean.handleFileUpload}" onclick="bui.show()"/>
+						</h:panelGrid>
+						<p:blockUI block="panel1" widgetVar="bui">  
+        					<h:outputText value="#{msg['global.wait']}" /><br />
+							<h:graphicImage library="default" width="50" height="50" name="images/ajax-loader-large.gif" alt="#{msg['global.wait']}"/>
+						</p:blockUI>
+					</h:form>
+				</p:tab>
+				<p:tab title="#{msg['installArtifact.tab2']}">
+					<h:form>
+						<h:panelGrid id="panel2" columns="3" cellpadding="10">
+							<h:outputLabel value="#{msg['installArtifact.url']}" for="url" />
+							<p:inputText id="url" value="#{installArtifactBean.url}" required="true" />
+							<p:commandButton value="#{msg['action.install']}" ajax="false"
+								actionListener="#{installArtifactBean.handleFileURL}" onclick="bui2.show()"/>
+						</h:panelGrid>
+						<p:blockUI block="panel2" widgetVar="bui2">  
+							<h:outputText value="#{msg['global.wait']}" /><br />
+							<h:graphicImage library="default" width="50" height="50" name="images/ajax-loader-large.gif" alt="#{msg['global.wait']}"/>
+						</p:blockUI>
+					</h:form>
+				</p:tab>
+			</p:accordionPanel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

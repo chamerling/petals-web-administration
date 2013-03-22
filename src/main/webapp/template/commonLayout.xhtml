@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="default" name="css/style.css"  target="body" />
+	<h:outputStylesheet library="default" name="css/menu.css"  target="body" />
+	<h:outputScript library="default" name="javascript/jquery-1.8.2.min.js" target="head"/>
+</h:head>
+
+<h:body>
+
+	<div id="menu">
+		<ui:insert name="menu">
+			<ui:include src="/template/menu.xhtml" />
+		</ui:insert>
+	</div>
+	
+	<div id="page">
+		<div id="content">
+			<ui:insert name="header">
+				<ui:include src="/template/commonHeader.xhtml" />
+			</ui:insert>
+			<div class="spacer"></div>
+			<ui:insert name="content">
+				<ui:include src="/template/commonContent.xhtml" />
+			</ui:insert>
+		</div>
+	</div>
+</h:body>
+</html>

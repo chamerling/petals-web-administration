@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+
+	<f:metadata>
+		<f:event listener="#{artifactsBean.preRenderView()}"
+			type="preRenderView" />
+	</f:metadata>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+
+
+		<ui:define name="header">
+			<h1>
+				<h:outputText value="#{msg['artifacts.header.h1']}" />
+			</h1>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<h:form>
+				<p:toolbar>
+					<p:toolbarGroup align="left">
+						<p:commandButton title="#{msg['artifacts.button.refresh']}"
+						value="#{msg['artifacts.button.refresh']}"
+						actionListener="#{artifactsBean.refreshPage()}"
+						ajax="false" icon="ui-icon-refresh" />
+						<p:separator />
+						<p:button title="#{msg['artifacts.button.install']}" outcome="installArtifact"
+						value="#{msg['artifacts.button.install']}"
+						 icon="ui-icon-circle-plus" />
+					</p:toolbarGroup>
+				</p:toolbar>
+				
+				<p:messages id="messages" />
+
+
+					<p:tabView id="tabView">
+
+						<p:tab id="tab1" title="#{msg['artifacts.bcList.tab.title']}">
+							<p:dataTable emptyMessage="" paginator="true"
+								rows="#{artifactsBean.maxArtifactPerPage}"
+								value="#{artifactsBean.artifactList.bcList}" var="elmt">
+								<p:column headerText="#{msg['artifacts.type']}">
+									<h:outputText value="#{elmt.type}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.name']}">
+									<h:outputText value="#{elmt.name}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.state']}">
+									<h:outputText value="#{elmt.state}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.actions']}">
+									<p:commandButton title="#{msg['artifacts.button.modify']}"
+										actionListener="#{artifactsBean.modify('BC',elmt.name)}"
+										ajax="false" icon="ui-icon-wrench" />
+									<p:commandButton title="#{msg['artifacts.button.start']}"
+										actionListener="#{artifactsBean.start('BC',elmt.name)}"
+										ajax="false" icon="ui-icon-play" />
+									<p:commandButton title="#{msg['artifacts.button.stop']}"
+										actionListener="#{artifactsBean.stop('BC',elmt.name)}"
+										ajax="false" icon="ui-icon-stop" />
+									<p:commandButton title="#{msg['artifacts.button.uninstall']}"
+										actionListener="#{artifactsBean.shutdown('BC',elmt.name)}"
+										ajax="false" icon="ui-icon-trash" />
+
+									<ui:remove>
+										<!-- comment this: need this button on interface ? -->
+										<p:commandButton title="#{msg['artifacts.button.shutdown']}"
+											actionListener="#{artifactsBean.shutdown('BC',elmt.name)}"
+											ajax="false" icon="ui-icon-power" />
+										<p:commandButton title="#{msg['artifacts.button.unload']}"
+											actionListener="#{artifactsBean.unload('BC',elmt.name)}}"
+											ajax="false" icon="ui-icon-eject" />
+									</ui:remove>
+
+								</p:column>
+							</p:dataTable>
+						</p:tab>
+						<p:tab id="tab2" title="#{msg['artifacts.seList.tab.title']}">
+							<p:dataTable emptyMessage="" paginator="true" rows="#{artifactsBean.maxArtifactPerPage}"
+								value="#{artifactsBean.artifactList.seList}" var="elmt">
+								<p:column headerText="#{msg['artifacts.type']}">
+									<h:outputText value="#{elmt.type}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.name']}">
+									<h:outputText value="#{elmt.name}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.state']}">
+									<h:outputText value="#{elmt.state}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.actions']}">
+									<p:commandButton title="#{msg['artifacts.button.modify']}"
+										actionListener="#{artifactsBean.modify('SE',elmt.name)}"
+										ajax="false" icon="ui-icon-wrench" />
+									<p:commandButton title="#{msg['artifacts.button.start']}"
+										actionListener="#{artifactsBean.start('SE',elmt.name)}"
+										ajax="false" icon="ui-icon-play" />
+									<p:commandButton title="#{msg['artifacts.button.stop']}"
+										actionListener="#{artifactsBean.stop('SE',elmt.name)}"
+										ajax="false" icon="ui-icon-stop" />
+									<p:commandButton title="#{msg['artifacts.button.uninstall']}"
+										actionListener="#{artifactsBean.shutdown('SE',elmt.name)}"
+										ajax="false" icon="ui-icon-trash" />
+								</p:column>
+							</p:dataTable>
+						</p:tab>
+						<p:tab id="tab3" title="#{msg['artifacts.saList.tab.title']}">
+							<p:dataTable emptyMessage="" paginator="true" rows="#{artifactsBean.maxArtifactPerPage}"
+								value="#{artifactsBean.artifactList.saList}" var="elmt">
+								<p:column headerText="#{msg['artifacts.type']}">
+									<h:outputText value="#{elmt.type}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.name']}">
+									<h:outputText value="#{elmt.name}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.state']}">
+									<h:outputText value="#{elmt.state}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.actions']}">
+									<p:commandButton title="#{msg['artifacts.button.modify']}"
+										actionListener="#{artifactsBean.modify('SA',elmt.name)}"
+										ajax="false" icon="ui-icon-wrench" />
+									<p:commandButton title="#{msg['artifacts.button.start']}"
+										actionListener="#{artifactsBean.start('SA',elmt.name)}"
+										ajax="false" icon="ui-icon-play" />
+									<p:commandButton title="#{msg['artifacts.button.stop']}"
+										actionListener="#{artifactsBean.stop('SA',elmt.name)}"
+										ajax="false" icon="ui-icon-stop" />
+									<p:commandButton title="#{msg['artifacts.button.uninstall']}"
+										actionListener="#{artifactsBean.shutdown('SA',elmt.name)}"
+										ajax="false" icon="ui-icon-trash" />
+								</p:column>
+							</p:dataTable>
+						</p:tab>
+						<p:tab id="tab4" title="#{msg['artifacts.suList.tab.title']}">
+							<p:dataTable emptyMessage="" paginator="true" rows="#{artifactsBean.maxArtifactPerPage}"
+								value="#{artifactsBean.artifactList.suList}" var="elmt">
+								<p:column headerText="#{msg['artifacts.type']}">
+									<h:outputText value="#{elmt.type}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.name']}">
+									<h:outputText value="#{elmt.name}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.state']}">
+									<h:outputText value="#{elmt.state}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.actions']}">
+									<p:commandButton title="#{msg['artifacts.button.modify']}"
+										actionListener="#{artifactsBean.modify('SU',elmt.name)}"
+										ajax="false" icon="ui-icon-wrench" />
+									<p:commandButton title="#{msg['artifacts.button.start']}"
+										actionListener="#{artifactsBean.start('SU',elmt.name)}"
+										ajax="false" icon="ui-icon-play" />
+									<p:commandButton title="#{msg['artifacts.button.stop']}"
+										actionListener="#{artifactsBean.stop('SU',elmt.name)}"
+										ajax="false" icon="ui-icon-stop" />
+									<p:commandButton title="#{msg['artifacts.button.uninstall']}"
+										actionListener="#{artifactsBean.shutdown('SU',elmt.name)}"
+										ajax="false" icon="ui-icon-trash" />
+								</p:column>
+							</p:dataTable>
+						</p:tab>
+						<p:tab id="tab5"
+							title="#{msg['artifacts.sharedLibraryList.tab.title']}">
+							<p:dataTable emptyMessage="" paginator="true" rows="#{artifactsBean.maxArtifactPerPage}"
+								value="#{artifactsBean.artifactList.sharedLibraryList}"
+								var="elmt">
+								<p:column headerText="#{msg['artifacts.type']}">
+									<h:outputText value="#{elmt.type}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.name']}">
+									<h:outputText value="#{elmt.name}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.state']}">
+									<h:outputText value="#{elmt.state}" />
+								</p:column>
+								<p:column headerText="#{msg['artifacts.actions']}">
+									<p:commandButton title="#{msg['artifacts.button.modify']}"
+										actionListener="#{artifactsBean.modify('SL',elmt.name)}"
+										ajax="false" icon="ui-icon-wrench" />
+									<p:commandButton title="#{msg['artifacts.button.start']}"
+										actionListener="#{artifactsBean.start('SL',elmt.name)}"
+										ajax="false" icon="ui-icon-play" />
+									<p:commandButton title="#{msg['artifacts.button.stop']}"
+										actionListener="#{artifactsBean.stop('SL',elmt.name)}"
+										ajax="false" icon="ui-icon-stop" />
+									<p:commandButton title="#{msg['artifacts.button.uninstall']}"
+										actionListener="#{artifactsBean.shutdown('SL',elmt.name)}"
+										ajax="false" icon="ui-icon-trash" />
+								</p:column>
+							</p:dataTable>
+						</p:tab>
+
+					</p:tabView>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+	id="WebApp_ID" version="2.5">
+ 
+  <display-name>JavaServerFaces</display-name>
+ 
+  <!-- Add Support for Spring -->
+  <listener>
+	<listener-class>
+		org.springframework.web.context.ContextLoaderListener
+	</listener-class>
+  </listener>
+  <listener>
+	<listener-class>
+		org.springframework.web.context.request.RequestContextListener
+	</listener-class>
+  </listener>
+
+  <!-- Change to "Production" when you are ready to deploy -->
+  <context-param>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Development</param-value>
+  </context-param>
+  
+   <!-- primeface theme see pom.xml for jar -->
+	<context-param>  
+	    <param-name>primefaces.THEME</param-name>  
+	    <param-value>smoothness</param-value>  
+	</context-param> 
+	
+	
+	
+	<!-- el-api and el impl (version 2.2) -->
+	<!-- You  need to override the expression factory implementation  -->
+	<!-- You need to overide jasper in tomcat -->
+	<!--if NOT: complaint in classloader with expressionFactory and message
+		in browser "Caused by: javax.el.ELException: Error Parsing" 
+	-->
+	
+  <context-param>
+    <param-name>com.sun.faces.expressionFactory</param-name>
+    <param-value>com.sun.el.ExpressionFactoryImpl</param-value>
+  </context-param>
+
+  <!-- Welcome page -->
+  <welcome-file-list>
+    <welcome-file>topology.xhtml</welcome-file>
+  </welcome-file-list>
+
+
+	<!-- CONFIGURE FileUpload
+		** thresholdSize specifies the maximum file size in bytes to keep uploaded files in memory.
+		If it exceeds this limit, it’ll be temporarily written to disk.
+		** uploadDirectory is the folder where to keep temporary files that exceed thresholdSize. -->
+	<filter>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+		<init-param>
+			<param-name>thresholdSize</param-name>
+			<param-value>10000000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>uploadDirectory</param-name>
+			<param-value>/tmp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>facesServlet</servlet-name>
+	</filter-mapping>
+
+ 
+  <!-- JSF Mapping -->
+  <servlet>
+    <servlet-name>facesServlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>facesServlet</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>facesServlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
+  
+  
+ 
+</web-app>

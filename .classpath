@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src/test/java" output="target/test-classes" including="**/*.java"/>
+  <classpathentry kind="src" path="src/test/resources" output="target/test-classes" excluding="**/*.java"/>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
+  <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" path="M2_REPO/javax/enterprise/cdi-api/1.0/cdi-api-1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/servlet/jstl/1.2/jstl-1.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/servlet/jsp/jsp-api/2.1/jsp-api-2.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/el/el-api/2.2/el-api-2.2.jar"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-core/3.1.2.RELEASE/spring-core-3.1.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-asm/3.1.2.RELEASE/spring-asm-3.1.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-web/3.1.2.RELEASE/spring-web-3.1.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-beans/3.1.2.RELEASE/spring-beans-3.1.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-context/3.1.2.RELEASE/spring-context-3.1.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-aop/3.1.2.RELEASE/spring-aop-3.1.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-expression/3.1.2.RELEASE/spring-expression-3.1.2.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jboss/interceptor/jboss-interceptor-api/1.1/jboss-interceptor-api-1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/sun/faces/jsf-api/2.1.13/jsf-api-2.1.13.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/sun/faces/jsf-impl/2.1.13/jsf-impl-2.1.13.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/glassfish/web/el-impl/2.2/el-impl-2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/petals/petals-admin-api/1.2.0-SNAPSHOT/petals-admin-api-1.2.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/ebmwebsourcing/easycommons/easycommons-lang/1.2/easycommons-lang-1.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-io/commons-io/1.4/commons-io-1.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/petals/petals-admin-jmx/1.2.0-SNAPSHOT/petals-admin-jmx-1.2.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/petals/petals-jmx-commons/1.6.1/petals-jmx-commons-1.6.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/petals/petals-jmx/1.10.2-SNAPSHOT/petals-jmx-1.10.2-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/petals/petals-jbi/1.3.1/petals-jbi-1.3.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-activation_1.1_spec/1.0.2/geronimo-activation_1.1_spec-1.0.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/petals/petals-commons-log/1.0.1/petals-commons-log-1.0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/ebmwebsourcing/easycommons/easycommons-properties/1.1/easycommons-properties-1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/ebmwebsourcing/easycommons/easycommons-io/1.1/easycommons-io-1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/ebmwebsourcing/easycommons/easycommons-thread/1.1/easycommons-thread-1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/ebmwebsourcing/easycommons/easycommons-uuid/1.1/easycommons-uuid-1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/github/stephenc/eaio-uuid/uuid/3.2.0/uuid-3.2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/petals/petals-jbi-descriptor/2.3.1/petals-jbi-descriptor-2.3.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/primefaces/primefaces/3.4.1/primefaces-3.4.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/primefaces/themes/smoothness/1.0.8/smoothness-1.0.8.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-fileupload/commons-fileupload/1.2.2/commons-fileupload-1.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.8.2/junit-4.8.2.jar"/>
+</classpath>

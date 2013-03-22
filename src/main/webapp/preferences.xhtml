@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+<h:body>
+	<f:metadata>
+		<f:event listener="#{preferencesBean.preRenderView()}" type="preRenderView" />
+	</f:metadata>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+		<ui:define name="header">
+			<h1>#{msg['preferences.title']}</h1>
+			<p class="page-description">#{msg['preferences.description']}</p>
+		</ui:define>
+		
+		<ui:define name="menu">
+			<ui:include src="/template/menu.xhtml">
+				<ui:param name="prefsClass" value="selected" />
+   			</ui:include>
+		</ui:define>
+
+		<ui:define name="content">
+			<h:form>
+				<div class="prefs-messages">
+					<p:messages id="messages" autoUpdate="true" closable="true" />
+				</div>
+				
+				<!-- Topology -->
+				<div class="page-left prefs">
+					<p class="prefs-title">#{msg['preferences.topology.title']}</p>
+					
+					<div class="prefs-content">
+						<p class="prefs-legend">
+							#{msg['preferences.select.legend']}
+							<h:selectOneMenu value="#{preferencesBean.prefs.connection}" onchange="submit()" valueChangeListener="#{preferencesBean.switchConnection}">  
+            					<f:selectItem itemLabel="#{msg['preferences.select.server']}" itemValue="SERVER" />  
+            					<f:selectItem itemLabel="#{msg['preferences.select.url']}" itemValue="TOPOLOGY" />  
+            				</h:selectOneMenu>
+						</p>
+
+						<c:choose>
+							<c:when test="#{preferencesBean.prefs.isServerConnection()}">
+								<div id="server">
+									<p class="prefs-legend">#{msg['preferences.legend.server']}</p>
+									<table>
+									<tr>
+										<td class="prefs-field">#{msg['preferences.host']}</td>
+										<td><h:inputText id="host" value="#{preferencesBean.prefs.host}" /></td>
+									</tr>
+									<tr>
+										<td class="prefs-field">#{msg['preferences.port']}</td>
+										<td><h:inputText id="port" value="#{preferencesBean.prefs.port}" /></td>
+									</tr>
+									<tr>
+										<td class="prefs-field">#{msg['preferences.user']}</td>
+										<td><h:inputText id="user" value="#{preferencesBean.prefs.user}" /></td>
+									</tr>
+									<tr>
+										<td class="prefs-field">#{msg['preferences.password']}</td>
+										<td><h:inputText id="pass" value="#{preferencesBean.prefs.password}" /></td>
+									</tr>
+									</table>
+								</div>
+							</c:when>
+						
+							<c:otherwise>
+								<div id="topology-xml">
+									<p class="prefs-legend">#{msg['preferences.legend.topology-xml']}</p>
+									<table>
+										<tr>
+											<td class="prefs-field">#{msg['preferences.topologyURL']}</td>
+											<td class="prefs-input"><h:inputText id="topologyURL" value="#{preferencesBean.prefs.topologyURL}" /></td>
+										</tr>
+									</table>
+								</div>
+							</c:otherwise>	
+						</c:choose>
+						
+						<p class="prefs-button-container">
+							<p:commandButton value="#{msg['action.test.connection']}" actionListener="#{preferencesBean.testConnection()}" ajax="false" icon="ui-icon-star" />
+							&nbsp;
+							<p:commandButton value="#{msg['action.save']}" actionListener="#{preferencesBean.update}" icon="ui-icon-disk" ajax="false" />
+						</p>
+					</div>
+				</div>
+				
+				<!-- UI preferences -->
+				<div class="page-left prefs">
+					<p class="prefs-title">#{msg['preferences.display.title']}</p>
+					
+					<div class="prefs-content">
+						<table>
+							<tr>
+								<td class="prefs-field">#{msg['preferences.maxPerPageArtifactList']}</td>
+								<td><h:inputText id="maxPerPageArtifactList" value="#{preferencesBean.prefs.maxPerPageArtifactList}" /></td>
+							</tr>
+							<tr>
+								<td class="prefs-field">#{msg['preferences.maxPerPageServiceList']}</td>
+								<td><h:inputText id="maxPerPageServiceList" value="#{preferencesBean.prefs.maxPerPageServiceList}" /></td>
+							</tr>
+							<tr>
+								<td class="prefs-field">#{msg['preferences.lang']}</td>
+								<td>
+									<h:selectOneMenu value="#{preferencesBean.prefs.locale}" onchange="submit()" valueChangeListener="#{preferencesBean.countryLocaleCodeChanged}" styleClass="prefs-lang-combo">
+	   									<f:selectItems value="#{preferencesBean.getLocalesToLabels()}" />
+	   								</h:selectOneMenu>
+	   							</td>
+							</tr>
+						</table>
+						
+						<p class="prefs-button-container">
+							<p:commandButton
+								value="#{msg['action.save']}"
+								actionListener="#{preferencesBean.update}" 
+								icon="ui-icon-disk"
+								ajax="false" />
+						</p>
+					</div>
+				</div>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

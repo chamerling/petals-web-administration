@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<body>
+	<ui:composition>
+		<!-- Menu -->
+		<div id="menu-wrapper">
+			<div id="logo">
+				<a href="#"><h:graphicImage library="default" name="images/logo.png" width="130" height="105" alt="logo" /></a>
+			</div>
+			
+			<ul id="menu-items">
+				<li class="#{topoClass != null ? topoClass : 'not-selected'}"><a href="#"><h:link outcome="topology" value="#{msg['menu.topology']}" /></a></li>
+				<li class="#{prefsClass != null ? prefsClass : 'not-selected'}"><a href="#"><h:link outcome="preferences" value="#{msg['menu.preferences']}" /></a></li>
+				<li class="#{aboutClass != null ? aboutClass : 'not-selected'}"><a href="#"><h:link outcome="about" value="#{msg['menu.about']}" /></a></li>
+			</ul>
+		</div>
+		<!--END of menu-->
+	</ui:composition>
+</body>
+</html>

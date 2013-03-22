@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<project name="Java to EasyWSDL" basedir="D:/Test" default="JavaToWSDL">
+
+	<!-- Update it the first time -->
+   <property name="jte.home" location ="D:\JavaToEasyWsdl\"/>
+   
+   <!-- Change the values for every EJB -->
+   <property name="ejb.libraries" location ="D:/Test/"/>
+   <property name="class.name" value="org.ow2.petals.examples.ejb.addorder.AddOrderRemote" />
+   <property name="output.directory" value="D:\Test\Output" />
+   <property name="wsdl.name" value="D:/Test.wsdl" />
+   <!-- End of Section -->
+
+   <path id="cxf.classpath">
+	  <fileset dir="${ejb.libraries}">
+         <include name="*.jar"/>
+      </fileset>
+	  
+      <fileset dir="${jte.home}">
+         <include name="*.jar"/>
+      </fileset>
+   </path>
+      
+   <target name="JavaToWSDL">
+      <java classname="org.ow2.easywsdl.tooling.java2wsdl.Main" fork="true">
+         <!-- <arg value="-poly"/> -->
+		 <arg value="-verbose"/>
+		 
+		 <!--
+		 <arg value="-createxsdimports" />
+		 <arg value="-d" />
+		 <arg value="${output.directory}" />
+         -->
+		 
+		 <arg value="-o"/>
+         <arg value="${wsdl.name}"/>
+         <arg value="${class.name}"/>
+         <classpath>
+            <path refid="cxf.classpath"/>
+         </classpath>
+      </java>
+   </target>
+</project>

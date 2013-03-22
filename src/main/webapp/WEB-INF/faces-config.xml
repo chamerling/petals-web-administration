@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config 
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	version="2.1">
+
+	<application>
+		<locale-config>
+			<default-locale>fr_FR</default-locale>
+			<!-- <supported-locale>en</supported-locale> -->
+		</locale-config>
+		<resource-bundle>
+			<base-name>org.ow2.petals.webadministration.messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	</application>
+
+<!-- 
+	<managed-bean>
+		<managed-bean-name>user</managed-bean-name>
+		<managed-bean-class>org.ow2.petals.webadministration.managedbean.UserBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>userBo</property-name>
+			<value>#{userBo}</value>
+		</managed-property>
+	</managed-bean>
+-->
+
+	<navigation-rule>
+		<from-view-id>/installArtifact.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{installArtifactBean.handleFileUpload}</from-action>
+			<if>#{true}</if>
+			<to-view-id>/artifacts.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>preferences</from-outcome>
+			<to-view-id>/preferences.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>topology</from-outcome>
+			<to-view-id>/topology.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>node</from-outcome>
+			<to-view-id>/node.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>installArtifact</from-outcome>
+			<to-view-id>/installArtifact.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registry</from-outcome>
+			<to-view-id>/registry.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>about</from-outcome>
+			<to-view-id>/about.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+</faces-config>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+  	xmlns:f="http://java.sun.com/jsf/core"
+  	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:body>
+	<ui:composition template="/template/commonLayout.xhtml">
+		<ui:define name="header">
+			<h1>#{msg['topology.title']}</h1>
+			<p class="page-description">#{msg['topology.description']}</p>
+		</ui:define>
+		
+		<ui:define name="menu">
+			<ui:include src="/template/menu.xhtml">
+				<ui:param name="topoClass" value="selected" />
+   			</ui:include>
+		</ui:define>
+
+		<ui:define name="content">
+				
+			<!-- The result depends on the found nodes -->
+			<c:choose>
+				<!-- No node to show? -->
+				<c:when test="#{topologyBean.isEmptyTopology( true )}">
+					<p class="topology-error">#{msg['topology.error.empty']}</p>
+					<p class="topology-error">#{msg['topology.error.empty.help']}</p>
+				</c:when>
+
+				<c:otherwise>
+					<p class="page-left">#{topologyBean.getFormattedDescription()}</p>
+					<div id="topologie">
+						<div class="small-empty-topo"></div>
+						<div id="topo-up" class="common-topo"></div>
+						<div class="small-empty-topo"></div>
+				
+						<!-- Now, we loop until we have displayed all the nodes -->
+						<ui:repeat value="#{topologyBean.getPetalsNodes()}" var="node" varStatus="status">
+		
+							<h:panelGroup rendered="#{status.index mod 2 eq 0}">
+								<h:link outcome="node" class="tip">
+									<div class="bus #{node.online ? 'purple-left-bus':'grey-left-bus'}">
+										<span>#{msg['topology.tooltip.host']} #{node.host}</span>
+										<p>#{node.containerName}</p>
+									</div>
+									<f:param name="name" value="#{node.containerName}" />
+								</h:link>
+		
+								<div class="topo-middle common-topo"></div>
+								<div class="big-empty-topo"></div>
+							</h:panelGroup>
+		
+							<h:panelGroup rendered="#{status.index mod 2 eq 1}">
+								<div class="big-empty-topo"></div>
+								<div class="topo-middle common-topo"></div>
+								<h:link outcome="node" class="tip">
+									<div class="bus #{node.online ? 'purple-right-bus':'grey-right-bus'}">
+										<span>#{msg['topology.tooltip.host']} #{node.host}</span>
+										<p>#{node.containerName}</p>
+									</div>
+									<f:param name="name" value="#{node.containerName}" />
+								</h:link>
+							</h:panelGroup>
+						</ui:repeat>
+		
+						<div class="big-empty-topo"></div>
+						<div class="topo-middle common-topo"></div>
+						<div class="big-empty-topo"></div>
+						
+						<div class="small-empty-topo"></div>
+						<div id="topo-down"  class="common-topo"></div>
+						<div class="small-empty-topo"></div>
+					</div>
+				</c:otherwise>
+			</c:choose>
+			<!-- End of node display -->
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>
